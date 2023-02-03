@@ -1,0 +1,16 @@
+---
+export function getStaticPaths (){
+  return[
+    {params:{wsid:'1'}},
+    {params:{wsid:'2'}},
+  ]
+}
+
+const { wsid } = Astro.params
+---
+
+<html>
+  <>
+    <h1>--{wsid}</h1>
+  </>
+</html>

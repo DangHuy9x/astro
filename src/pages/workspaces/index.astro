@@ -1,0 +1,112 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import WorkSpace from "../../components/workspace/workspace";
+import type { WorkSpacesInfo, WorkspacesRes } from "@hexabase/hexabase-js/dist/lib/types/workspace";
+import { workspacesService } from "../../services/workspace.service";
+import { createClient } from "@hexabase/hexabase-js";
+
+// const baseUrl = 'https://hxb-graph.hexabase.com/graphql'
+// async function getWorkspaces() {
+// 	let token
+// 	console.log('1')
+// 	if(localStorage.getItem('user')===null){
+// 		console.log('2')
+// 		console.log('test',JSON.parse(localStorage.getItem("user")!))
+// 		return;
+
+// 	}else{
+
+// 		token = JSON.parse(localStorage.getItem("user")!).token;
+// 	}
+//   const hexabase = await createClient({ url: baseUrl, token: token });
+//   const { workspaces, error } = await hexabase.workspace.get();
+//   return workspaces;
+// }
+
+
+// async function getSession(request: Request) {
+//   const cookie = request.headers.get("Cookie");
+//   return sessionStorage.getSession(cookie);
+// }
+// const USER_TOKEN = "userToken";
+// async function getTokenFromCookie(request: Request): Promise<string | undefined> {
+//   const session = await getSession(request);
+//   const token = session.get(USER_TOKEN);
+//   return token ?? undefined;
+// }
+
+// export async function getWorkspaces(request: Request): Promise<WorkspacesRes | undefined> {
+//   const token = await getTokenFromCookie(request);
+
+//   if (token) {
+//     const hexabase = await createClient({ url: baseUrl, token, email: '', password: '' });
+//     return await hexabase.workspace.get();
+//   } else {
+//     return undefined;
+//   }
+// }
+console.log('hello')
+const token = Astro.cookies.get('user')
+console.log('token',token)
+
+
+---
+
+<script>
+	import { createClient } from "@hexabase/hexabase-js";
+	const baseUrl = 'https://hxb-graph.hexabase.com/graphql'
+	async function getWorkspaces() {
+	let token
+	console.log('1')
+	if(localStorage.getItem('user')===null){
+		console.log('2')
+		console.log('test',JSON.parse(localStorage.getItem("user")!))
+		return;
+
+	}else{
+
+		token = JSON.parse(localStorage.getItem("user")!).token;
+	}
+  const hexabase = await createClient({ url: baseUrl, token: token });
+  const { workspaces, error } = await hexabase.workspace.get();
+  return workspaces;
+}
+
+const data = await getWorkspaces()
+console.log('data',data)
+ 
+
+</script>
+<MainLayout>
+	<div class="pt-6">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    	<h1 class="text-4xl font-extrabold dark:text-white">Workspace</h1>
+			
+			<!-- <ul class="menu bg-base-100">
+        <div class="flex items-center my-8">
+
+          <p class="mr-3">Current Workspace</p>
+          <select class="select select-bordered w-full max-w-xs">
+            <option disabled selected>Select WorkSpace </option>
+            {data?.map((workspace: any) => (
+              <option>
+                {workspace.title}
+              </option>
+            ))}
+          </select>
+        </div>
+        <li><a>Item 1</a></li>
+        <li><a>Item 2</a></li>
+        <li><a>Item 3</a></li>
+      </ul> -->
+      <!-- <form action="/workspaces/wsid.json" method="post" >
+        <input type='text' name='text' value='asa' />
+        <input type="submit" />
+			</form> -->
+      <WorkSpace client:visible />
+
+			
+    </div>
+	</div>
+</MainLayout>
+

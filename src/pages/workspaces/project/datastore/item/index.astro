@@ -1,0 +1,18 @@
+---
+import DataStore from "../../../../../components/datastore/datastore";
+import MainLayout from "../../../../../layouts/MainLayout.astro";
+
+---
+
+<html>
+  <>
+    <MainLayout>
+      <div class="pt-6">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <h3 class="text-2xl font-extrabold dark:text-white">Name Current Project</h3>      
+          <DataStore client:visible />      
+        </div>
+      </div>
+    </MainLayout>
+  </>
+</html>

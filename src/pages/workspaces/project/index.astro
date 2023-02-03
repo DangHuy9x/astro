@@ -1,0 +1,16 @@
+---
+import Project from "../../../components/project/project";
+import MainLayout from "../../../layouts/MainLayout.astro";
+
+---
+
+<MainLayout>
+  <>
+    <div class="pt-6">
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <h1 class="text-4xl font-extrabold dark:text-white">Project</h1>      
+        <Project client:visible />      
+      </div>
+    </div>
+  </>
+</MainLayout>

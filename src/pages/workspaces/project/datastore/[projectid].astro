@@ -1,0 +1,15 @@
+---
+export function getStaticPaths() {
+  return [
+    {params: {projectid: 'clifford'}},
+    {params: {projectid: 'rover'}},
+    {params: {projectid: 'spot'}},
+  ];
+}
+
+const { dog } = Astro.params;
+const {frontmatter} = Astro.props
+console.log(frontmatter)
+console.log('1')
+---
+<div>Good dog, {dog}!</div>
